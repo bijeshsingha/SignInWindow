@@ -5,6 +5,7 @@
 package registrationWindow;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.awt.font.TextAttribute;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,6 +24,7 @@ public class SignIn extends javax.swing.JFrame {
      */
     public SignIn() {
         initComponents();
+        this.signIn.requestFocus();
     }
 
     /**
@@ -47,6 +49,7 @@ public class SignIn extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         forgetPass = new javax.swing.JLabel();
+        remMe = new javax.swing.JCheckBox();
         jPanel6 = new javax.swing.JPanel();
         signIn = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -54,7 +57,7 @@ public class SignIn extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         jPanel8 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        google = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         signUp = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -62,7 +65,6 @@ public class SignIn extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(0, 0));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(950, 630));
 
@@ -102,16 +104,14 @@ public class SignIn extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(369, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 375, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(0, 48, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
@@ -147,6 +147,11 @@ public class SignIn extends javax.swing.JFrame {
                 usernameMouseClicked(evt);
             }
         });
+        username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameKeyPressed(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/registrationWindow/icons8-user-24.png"))); // NOI18N
 
@@ -165,6 +170,11 @@ public class SignIn extends javax.swing.JFrame {
         password.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 passwordMouseClicked(evt);
+            }
+        });
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordKeyPressed(evt);
             }
         });
 
@@ -187,13 +197,18 @@ public class SignIn extends javax.swing.JFrame {
             }
         });
 
+        remMe.setForeground(new java.awt.Color(102, 102, 102));
+        remMe.setText("Remember me");
+        remMe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        remMe.setName(""); // NOI18N
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -206,7 +221,10 @@ public class SignIn extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(forgetPass, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(remMe, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(forgetPass)))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -228,8 +246,10 @@ public class SignIn extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(forgetPass)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(forgetPass)
+                    .addComponent(remMe))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel5);
@@ -243,11 +263,19 @@ public class SignIn extends javax.swing.JFrame {
         signIn.setText("Sign In");
         signIn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         signIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signInMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 signInMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 signInMouseExited(evt);
+            }
+        });
+        signIn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                signInKeyPressed(evt);
             }
         });
         jPanel6.add(signIn, java.awt.BorderLayout.CENTER);
@@ -273,17 +301,25 @@ public class SignIn extends javax.swing.JFrame {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setPreferredSize(new java.awt.Dimension(300, 150));
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/registrationWindow/icons8-google-24.png"))); // NOI18N
-        jLabel6.setText("Sign In with Google");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel6.setIconTextGap(10);
+        google.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        google.setIcon(new javax.swing.ImageIcon(getClass().getResource("/registrationWindow/icons8-google-24.png"))); // NOI18N
+        google.setText("Sign In with Google");
+        google.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        google.setIconTextGap(10);
+        google.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                googleMouseEntered(evt);
+            }
+        });
 
-        jLabel7.setText("New User?");
+        jLabel7.setText("Dont' have an account yet?");
 
         signUp.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         signUp.setText("Sign Up");
         signUp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signUpMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 signUpMouseEntered(evt);
             }
@@ -293,26 +329,28 @@ public class SignIn extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(signUp)
+                        .addGap(12, 12, 12))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(google, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)))
                 .addGap(40, 40, 40))
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(signUp)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(google, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(signUp))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(signUp)
+                    .addComponent(jLabel7))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
 
@@ -355,7 +393,7 @@ public class SignIn extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1103, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,7 +405,7 @@ public class SignIn extends javax.swing.JFrame {
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
@@ -403,13 +441,14 @@ public class SignIn extends javax.swing.JFrame {
 
     private void usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusGained
         // TODO add your handling code here:
-        //if(this.username.getText().equals("Username"))
-            //this.username.setText("");
+        if(this.username.getText().equals("Username"))
+            this.username.setText("");
     }//GEN-LAST:event_usernameFocusGained
 
     private void passwordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFocusGained
         // TODO add your handling code here:
-        
+        if(this.password.getText().equals("password"))
+            this.password.setText("");
     }//GEN-LAST:event_passwordFocusGained
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -479,6 +518,73 @@ public class SignIn extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setLocation(evt.getXOnScreen()-frameX, evt.getYOnScreen()-frameY);
     }//GEN-LAST:event_jPanel2MouseDragged
+
+    private void googleMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_googleMouseEntered
+        // TODO add your handling code here:
+        this.google.requestFocus();
+        this.google.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_googleMouseEntered
+
+    
+    void checkInDB(){
+        String username = "root";
+        String password = "bijesh@12345";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/sql_workbench", username, password);
+            // here sonoo is database name, root is username and password
+            Statement stmt = con.createStatement();
+            ResultSet rs; 
+            
+            String user = this.username.getText();
+            String pass = this.password.getText();
+            
+            rs = stmt.executeQuery("select * from credentials where username='"+user+"' and pass = '"+pass+"';");
+       
+            if(rs.next()){
+                dispose();
+                Welcom wl = new Welcom(this.getUsername());
+                wl.show();
+            }
+            else{
+                WrongCred wc = new WrongCred(this, rootPaneCheckingEnabled);
+                wc.show();
+                //JOptionPane.showConfirmDialog(this, "Wrong username or password! \n Would you like to Sign Up?","Wrong Password",JOptionPane.YES_NO_CANCEL_OPTION);
+                this.username.setText("Username");
+                this.password.setText("password");
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    private void signInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signInMouseClicked
+        // TODO add your handling code here:
+        this.checkInDB();
+    }//GEN-LAST:event_signInMouseClicked
+
+    private void signInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_signInKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_signInKeyPressed
+
+    private void passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            this.checkInDB();
+        }
+    }//GEN-LAST:event_passwordKeyPressed
+
+    private void usernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameKeyPressed
+
+    private void signUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpMouseClicked
+        // TODO add your handling code here:
+        dispose();
+        SignUp wl = new SignUp();
+        wl.show();
+    }//GEN-LAST:event_signUpMouseClicked
     
     /**
      * @param args the command line arguments
@@ -517,12 +623,12 @@ public class SignIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel forgetPass;
+    private javax.swing.JLabel google;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -539,8 +645,16 @@ public class SignIn extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JPasswordField password;
+    private javax.swing.JCheckBox remMe;
     private javax.swing.JLabel signIn;
     private javax.swing.JLabel signUp;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
+
+    String getUsername(){
+        return username.getText();
+    }
+    String getPassword(){
+        return password.getText();
+    }
 }
