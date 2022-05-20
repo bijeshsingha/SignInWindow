@@ -530,9 +530,10 @@ public class SignIn extends javax.swing.JFrame {
         String username = "root";
         String password = "bijesh@12345";
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            final String url= "jdbc:mysql://localhost:3306/sql_workbench";
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/sql_workbench", username, password);
+                    url, username, password);
             // here sonoo is database name, root is username and password
             Statement stmt = con.createStatement();
             ResultSet rs; 
